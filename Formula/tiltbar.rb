@@ -7,13 +7,13 @@
 # 4. Push to the homebrew-tiltbar repository
 #
 # To get the sha256 after creating a release:
-#   curl -sL https://github.com/seriousben/tilt-status-bar/archive/refs/tags/v0.1.0.tar.gz | shasum -a 256
+#   curl -sL https://github.com/seriousben/tilt-status-bar/archive/refs/tags/v1.1.0.tar.gz | shasum -a 256
 
 class Tiltbar < Formula
   desc "macOS menu bar app that shows your Tilt resource status at a glance"
   homepage "https://github.com/seriousben/tilt-status-bar"
-  url "https://github.com/seriousben/tilt-status-bar/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "REPLACE_WITH_ACTUAL_SHA256"
+  url "https://github.com/seriousben/tilt-status-bar/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
   license "Apache-2.0"
 
   depends_on xcode: ["14.0", :build]
