@@ -30,23 +30,29 @@ class Tiltbar < Formula
     # Copy Info.plist
     cp "Sources/TiltBar/Resources/Info.plist", "#{contents}/Info.plist"
 
-    # Copy icon resources
+    # Copy icon resources to standard Contents/Resources location
     cp_r Dir["Sources/TiltBar/Resources/*.png"], resources
     cp_r Dir["Sources/TiltBar/Resources/*.ico"], resources
 
-    # Install to Applications
-    prefix.install app_bundle
+    # Move the app bundle to the prefix
+    app = Pathname.new("#{prefix}/TiltBar.app")
+    FileUtils.mv app_bundle, app
+  end
+
+  def post_install
+    # Create symlink in Homebrew's Applications directory
+    system_command "ln",
+                   args: ["-sf", "#{prefix}/TiltBar.app", "#{HOMEBREW_PREFIX}/Applications/TiltBar.app"]
   end
 
   def caveats
     <<~EOS
-      TiltBar has been installed to:
-        #{prefix}/TiltBar.app
+      TiltBar has been installed as an app and symlinked to:
+        #{HOMEBREW_PREFIX}/Applications/TiltBar.app
 
-      To launch TiltBar:
-        open #{prefix}/TiltBar.app
-
-      Or search for "TiltBar" in Spotlight/Launchpad.
+      You can now:
+        - Search for "TiltBar" in Spotlight/Alfred/Launchpad
+        - Launch it from: open -a TiltBar
 
       TiltBar is a menu bar-only app and won't appear in the Dock.
 
