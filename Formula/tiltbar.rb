@@ -1,11 +1,5 @@
 # Homebrew Formula for TiltBar
 #
-# This file is a template. Once the first release is created:
-# 1. Create a new repository: https://github.com/seriousben/homebrew-tiltbar
-# 2. Copy this file to: Formula/tiltbar.rb in that repository
-# 3. Update the url and sha256 with actual release values
-# 4. Push to the homebrew-tiltbar repository
-#
 # To get the sha256 after creating a release:
 #   curl -sL https://github.com/seriousben/tilt-status-bar/archive/refs/tags/v1.1.0.tar.gz | shasum -a 256
 
