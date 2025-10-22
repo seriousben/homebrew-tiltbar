@@ -39,20 +39,18 @@ class Tiltbar < Formula
     FileUtils.mv app_bundle, app
   end
 
-  def post_install
-    # Create symlink in Homebrew's Applications directory
-    system_command "ln",
-                   args: ["-sf", "#{prefix}/TiltBar.app", "#{HOMEBREW_PREFIX}/Applications/TiltBar.app"]
-  end
-
   def caveats
     <<~EOS
-      TiltBar has been installed as an app and symlinked to:
-        #{HOMEBREW_PREFIX}/Applications/TiltBar.app
+      TiltBar.app has been installed to:
+        #{prefix}/TiltBar.app
 
-      You can now:
-        - Search for "TiltBar" in Spotlight/Alfred/Launchpad
-        - Launch it from: open -a TiltBar
+      To make it visible in Spotlight/Alfred/Launchpad, copy it to Applications:
+        cp -r #{prefix}/TiltBar.app ~/Applications/
+
+      Or launch it directly:
+        open #{prefix}/TiltBar.app
+
+      Note: Symlinks don't work with Spotlight - you must copy the app.
 
       TiltBar is a menu bar-only app and won't appear in the Dock.
 
