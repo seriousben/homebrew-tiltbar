@@ -14,13 +14,41 @@ class Tiltbar < Formula
 
   def install
     system "swift", "build", "-c", "release", "--disable-sandbox"
-    bin.install ".build/release/TiltBar" => "tiltbar"
+
+    # Create .app bundle structure
+    app_bundle = "#{buildpath}/TiltBar.app"
+    contents = "#{app_bundle}/Contents"
+    macos = "#{contents}/MacOS"
+    resources = "#{contents}/Resources"
+
+    mkdir_p macos
+    mkdir_p resources
+
+    # Copy executable
+    cp ".build/release/TiltBar", "#{macos}/TiltBar"
+
+    # Copy Info.plist
+    cp "Sources/TiltBar/Resources/Info.plist", "#{contents}/Info.plist"
+
+    # Copy icon resources
+    cp_r Dir["Sources/TiltBar/Resources/*.png"], resources
+    cp_r Dir["Sources/TiltBar/Resources/*.ico"], resources
+
+    # Install to Applications
+    prefix.install app_bundle
   end
 
   def caveats
     <<~EOS
-      TiltBar is a menu bar application. To run it:
-        tiltbar
+      TiltBar has been installed to:
+        #{prefix}/TiltBar.app
+
+      To launch TiltBar:
+        open #{prefix}/TiltBar.app
+
+      Or search for "TiltBar" in Spotlight/Launchpad.
+
+      TiltBar is a menu bar-only app and won't appear in the Dock.
 
       Make sure Tilt is installed and running:
         brew install tilt
@@ -32,8 +60,8 @@ class Tiltbar < Formula
   end
 
   test do
-    # Test that the binary exists and is executable
-    assert_predicate bin/"tiltbar", :exist?
-    assert_predicate bin/"tiltbar", :executable?
+    # Test that the app bundle exists and is executable
+    assert_predicate prefix/"TiltBar.app/Contents/MacOS/TiltBar", :exist?
+    assert_predicate prefix/"TiltBar.app/Contents/MacOS/TiltBar", :executable?
   end
 end
