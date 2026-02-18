@@ -1,13 +1,13 @@
 # Homebrew Formula for TiltBar
 #
 # To get the sha256 after creating a release:
-#   curl -sL https://github.com/seriousben/tiltbar/archive/refs/tags/v1.5.0.tar.gz | shasum -a 256
+#   curl -sL https://github.com/seriousben/tiltbar/archive/refs/tags/v1.5.1.tar.gz | shasum -a 256
 
 class Tiltbar < Formula
   desc "macOS menu bar app that shows your Tilt resource status at a glance"
   homepage "https://github.com/seriousben/tiltbar"
-  url "https://github.com/seriousben/tiltbar/archive/refs/tags/v1.5.0.tar.gz"
-  sha256 "c7d0bbc674f8d09b04e5c2fea976c59e288203029575de79f415c85d77651cc9"
+  url "https://github.com/seriousben/tiltbar/archive/refs/tags/v1.5.1.tar.gz"
+  sha256 "264e042f895f4f24e731bdd230170ad56c23a7379b0d43b5fd460cdf28cb2e3a"
   license "Apache-2.0"
 
   depends_on :macos => :ventura
